@@ -9,6 +9,7 @@ function App() {
 
   const [actresses, setActresses] = useState([])
   const [actors, setActors] = useState([])
+  const [actorsActresses, setActorsActresses] = useState([])
 
   function loadAct(urlApi, setFunction) {
     fetch(urlApi)
@@ -21,6 +22,9 @@ function App() {
   useEffect(() => { loadAct(actressesApi, setActresses) }, [])
   useEffect(() => { loadAct(actorsApi, setActors) }, [])
 
+  useEffect(() => { setActorsActresses([...actresses, ...actors]) }, [actors, actresses])
+
+  // console.log(actorsActresses)
 
 
   return (
@@ -79,6 +83,34 @@ function App() {
               ))
             }
           </div>
+
+          <div className="row g-2">
+            {
+              actorsActresses.map(actress => (
+                <div className="col-sm-6 col-md-4 col-lg-3 col-xl-2" key={`${actress.birth_year}-${actress.id}`}>
+                  <div className="card h-100">
+                    <div className="ratio ratio-1x1">
+                      <img className="card-img-top object-fit-cover" src={actress.image} alt={actress.name} />
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">{actress.name}</h5>
+                      <ul className="small list-unstyled">
+                        <li>{actress.birth_year}</li>
+                        <li>{actress.nationality}</li>
+                        {
+                          actress.awards.map((award, i) => (
+                            <li key={i}>{award}</li>
+                          ))
+                        }
+                      </ul>
+                      <p className="small">{actress.biography}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+
         </div>
       </section>
     </main>
