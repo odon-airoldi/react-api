@@ -31,6 +31,8 @@ function App() {
     <main>
       <section>
         <div className="container py-5">
+
+          <h2>Actresses</h2>
           <div className="row g-2">
             {
               actresses.map(actress => (
@@ -41,22 +43,34 @@ function App() {
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{actress.name}</h5>
-                      <ul className="small list-unstyled">
-                        <li>{actress.birth_year}</li>
-                        <li>{actress.nationality}</li>
+                      <p className="small text-secondary">{actress.nationality}, born in {actress.birth_year}  </p>
+                      <p className="small">{actress.biography}</p>
+                    </div>
+                    <div class="card-footer">
+                      <h3 className="h6 text-secondary mb-1">Awards</h3>
+                      <ul className="small list-unstyled text-secondary">
                         {
                           actress.awards.map((award, i) => (
-                            <li key={i}>{award}</li>
+                            <li key={i} className="">{award}</li>
                           ))
                         }
                       </ul>
-                      <p className="small">{actress.biography}</p>
+                      <h3 className="h6 text-secondary mb-1">Most famous movies</h3>
+                      <ul className="small list-unstyled text-secondary">
+                        {
+                          actress.most_famous_movies.map((item, i) => (
+                            <li key={i} className="">{item}</li>
+                          ))
+                        }
+                      </ul>
                     </div>
                   </div>
                 </div>
               ))
             }
           </div>
+
+          <h2>Actors</h2>
           <div className="row g-2">
             {
               actors.map(actress => (
@@ -84,6 +98,7 @@ function App() {
             }
           </div>
 
+          <h2>Actresses & actors</h2>
           <div className="row g-2">
             {
               actorsActresses.map(actress => (
